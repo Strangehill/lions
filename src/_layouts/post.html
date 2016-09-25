@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<style>
+  h1>span:nth-child(1) {
+    font-size:0.3em;
+  }
+  h1>span:nth-child(2) {
+    font-size:0.6em;
+  }
+  h1>span:nth-child(3) {
+    font-size:0.3em;
+  }
+  h3>span {
+    font-size:0.6em;
+  }
+  .materials>.columns:nth-child(1) {
+    background-color: #EFE;
+  }
+  .materials>.columns:nth-child(2) {
+    background-color: #FEE;
+  }
+  .materials>.columns:nth-child(3) {
+    background-color: #EEF;
+  }
+</style>
+
+<div class="callout" style="text-align: center;">
+  <h1>
+    <span>
+      {% if page.previous %}
+        <a href="{{ page.previous.url }}">see previous {{ page.previous.title }}</a>
+      {% endif %}
+    </span>
+    {{ page.title }}, <span>{{ page.date | date: "%b %-d, %Y" }}</span>
+    <span>
+      {% if page.next %}
+        <a href="{{ page.next.url }}">see following {{ page.next.title }}</a>
+      {% endif %}
+    </span>
+  </h1>
+  <div>
+    {{ content }}
+  </div>
+</div>
+
+<div class="row materials">
+  {% for item in site.show_and_tell %}
+    {% if item.date==page.date %}
+      <div class="large-4 medium-12 columns">
+        <h3>Show and Tell <span>page: {{ item.page }}</span></h3>
+        <h4>
+        {{ item.title }}
+        </h4>
+        <p>
+        {{ item.content | markdownify }}
+        </p>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% for item in site.story %}
+    {% if item.date==page.date %}
+      <div class="large-4 medium-12 columns">
+        <h3>Story <span>story: {{ item.story }}</span></h3>
+        <h4>
+        {{ item.title }}
+        </h4>
+        <p>
+          {{ item.content | markdownify }}
+        </p>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% for item in site.phonics %}
+    {% if item.date==page.date %}
+      <div class="large-4 medium-12 columns">
+        <h3>Phonics <span>unit: 3</span></h3>
+        <h4>
+        {{ item.title }}
+        </h4>
+        <p>
+          {{ site.lions_phonics | where:"unit","3" }}
+        </p>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
